@@ -13,7 +13,7 @@
 
 1. Установить одной командой:
     ```shell
-        make install
+    make install
     ```
 
 2. Приложение доступно по адресу: http://localhost
@@ -21,7 +21,7 @@
 3. Vite dev-server с HMR запускается автоматически вместе с контейнером `node`.
    Если нужно перезапустить:
     ```shell
-        docker compose restart node
+    docker compose restart node
     ```
 
 ## Make-команды
