@@ -12,15 +12,15 @@ services:
         volumes:
             - ./:/var/www/html
 
-nginx:
-    image: nginx:1.29
-    depends_on:
-        - php
-    ports:
-        - "80:80"
-    volumes:
-        - ./:/var/www/html:ro
-        - ./_docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    nginx:
+        image: nginx:1.29
+        depends_on:
+            - php
+        ports:
+            - "80:80"
+        volumes:
+            - ./:/var/www/html:ro
+            - ./_docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
 
     mysql:
         image: mysql:8.4
@@ -34,7 +34,7 @@ nginx:
         volumes:
             - mysql_data:/var/lib/mysql
         healthcheck:
-            test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$MYSQL_ROOT_PASSWORD\" || exit 1"]
+            test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -p\"$$MYSQL_ROOT_PASSWORD\" || exit 1"]
             interval: 5s
             timeout: 3s
             retries: 20
@@ -48,16 +48,6 @@ nginx:
             - redis_data:/data
         command: [ "redis-server", "--appendonly", "yes" ]
 
-    redisinsight:
-        image: redis/redisinsight:latest
-        depends_on:
-            - redis
-        ports:
-            - "5540:5540"
-        volumes:
-            - redisinsight_data:/data
-
 volumes:
     mysql_data:
     redis_data:
-    redisinsight_data:
