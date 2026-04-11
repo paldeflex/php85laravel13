@@ -43,3 +43,17 @@
 | `make cache-clear` | Очистка кэша |
 | `make optimize` | Оптимизация |
 | `make status` | Статус контейнеров |
+
+## Xdebug
+
+Xdebug установлен в режиме `trigger` — дебаг включается только по запросу.
+
+### Настройка PhpStorm
+
+1. **Settings → PHP → Debug** → Xdebug port: `9003`, галка `Can accept external connections`
+2. **Settings → PHP → Servers** → `+`:
+    - Name: любое
+    - Host: `localhost`, Port: `80`, Debugger: `Xdebug`
+    - ✓ Use path mappings
+    - Корень проекта → `/var/www/html`
+3. Включи прослушивание: **Run → Start Listening for PHP Debug Connections**
