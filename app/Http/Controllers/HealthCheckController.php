@@ -204,6 +204,22 @@ class HealthCheckController extends Controller
             'ok' => $viteHot || $viteManifest,
         ];
 
+        // Xdebug
+        $xdebugLoaded = extension_loaded('xdebug');
+        $xdebugMode = ini_get('xdebug.mode') ?: 'off';
+        $xdebugHost = ini_get('xdebug.client_host') ?: 'N/A';
+        $xdebugPort = ini_get('xdebug.client_port') ?: 'N/A';
+        $xdebugStart = ini_get('xdebug.start_with_request') ?: 'N/A';
+        $xdebugVersion = $xdebugLoaded ? phpversion('xdebug') : null;
+        $checks['xdebug'] = [
+            'name' => 'Xdebug',
+            'version' => $xdebugVersion,
+            'details' => $xdebugLoaded
+                ? "mode: {$xdebugMode} | host: {$xdebugHost}:{$xdebugPort} | start: {$xdebugStart}"
+                : 'not installed',
+            'ok' => $xdebugLoaded && $xdebugMode !== 'off',
+        ];
+
         // APP_KEY
         $appKey = config('app.key');
         $checks['app_key'] = [
