@@ -21,6 +21,7 @@ RUN apt-get update && apt-get install -y \
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 COPY _docker/php/xdebug.ini /usr/local/etc/php/conf.d/99-xdebug.ini
 
-RUN git config --global --add safe.directory /var/www/html
+RUN git config --global --add safe.directory /var/www/html \
+    && mkdir -p /var/www/.composer && chown www-data:www-data /var/www/.composer
 
 USER www-data
