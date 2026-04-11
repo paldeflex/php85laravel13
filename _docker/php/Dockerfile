@@ -1,5 +1,10 @@
 FROM php:8.5-fpm
 
+ARG UID=1000
+ARG GID=1000
+
+RUN usermod -u ${UID} www-data && groupmod -g ${GID} www-data
+
 WORKDIR /var/www/html
 
 RUN apt-get update && apt-get install -y \
@@ -13,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
-COPY _docker/php/entrypoint.sh /usr/local/bin/entrypoint.sh
 
-ENTRYPOINT ["sh", "/usr/local/bin/entrypoint.sh"]
+RUN git config --global --add safe.directory /var/www/html
+
+USER www-data
