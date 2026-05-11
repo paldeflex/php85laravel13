@@ -1,4 +1,4 @@
-.PHONY: install up down rebuild restart logs shell shell-redis test migrate fresh seed cache-clear optimize status
+.PHONY: install up down rebuild restart logs shell shell-node shell-redis test migrate fresh seed cache-clear optimize status tinker route-list queue-work queue-restart storage-link composer-install composer-update composer-dump npm-install npm-dev npm-build npm-lint
 
 # Полная установка с нуля
 install:
@@ -35,12 +35,31 @@ logs:
 shell:
 	docker compose exec php sh
 
+shell-node:
+	docker compose exec node sh
+
 shell-redis:
 	docker compose exec redis redis-cli
 
 # Тесты
 test:
 	docker compose exec php php artisan test
+
+# Artisan
+tinker:
+	docker compose exec php php artisan tinker
+
+route-list:
+	docker compose exec php php artisan route:list
+
+queue-work:
+	docker compose exec php php artisan queue:work
+
+queue-restart:
+	docker compose exec php php artisan queue:restart
+
+storage-link:
+	docker compose exec php php artisan storage:link
 
 # Миграции
 migrate:
@@ -59,6 +78,26 @@ cache-clear:
 
 optimize:
 	docker compose exec php php artisan optimize
+
+# Composer
+composer-install:
+	docker compose exec php composer install
+
+composer-update:
+	docker compose exec php composer update
+
+composer-dump:
+	docker compose exec php composer dump-autoload
+
+# NPM
+npm-install:
+	docker compose exec node npm install
+
+npm-dev:
+	docker compose exec node npm run dev
+
+npm-build:
+	docker compose exec node npm run build
 
 # Статус контейнеров
 status:
