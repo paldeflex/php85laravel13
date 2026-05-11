@@ -43,6 +43,18 @@
 | `make cache-clear` | Очистка кэша |
 | `make optimize` | Оптимизация |
 | `make status` | Статус контейнеров |
+| `make shell-node` | Shell в Node-контейнер |
+| `make tinker` | Laravel Tinker |
+| `make route-list` | Список маршрутов Laravel |
+| `make queue-work` | Запуск Laravel queue worker |
+| `make queue-restart` | Перезапуск Laravel queue workers |
+| `make storage-link` | Создание storage symlink |
+| `make composer-install` | Установка Composer-зависимостей |
+| `make composer-update` | Обновление Composer-зависимостей |
+| `make composer-dump` | Перегенерация Composer autoload |
+| `make npm-install` | Установка npm-зависимостей |
+| `make npm-dev` | Запуск Vite dev-server вручную |
+| `make npm-build` | Production-сборка фронтенда |
 
 ## Xdebug
 
